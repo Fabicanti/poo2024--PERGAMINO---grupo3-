@@ -12,9 +12,16 @@ public class CountryService {
     private CountryRepository countryRepository;
 
     public Country addCountry(Country country){
+        Country newCountry = new Country();
+        newCountry.setId(country.getId());
+        newCountry.setName(country.getName());
 
-
-        Country newCountry = countryRepository.save(country);
+        newCountry = countryRepository.save(country);
         return newCountry;
     }
+
+    public boolean modifyCountry(Country country){
+        return true;
+    }
+
 }
