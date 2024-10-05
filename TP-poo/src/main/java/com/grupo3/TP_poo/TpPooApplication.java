@@ -8,7 +8,6 @@ public class TpPooApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(TpPooApplication.class, args);
-		System.out.println("hola");
 	}
 
 }
