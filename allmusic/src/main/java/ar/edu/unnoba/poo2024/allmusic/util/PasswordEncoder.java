@@ -10,7 +10,7 @@ public class PasswordEncoder {
         return Password.hash(rawPassword).addSalt("someSalt").withBCrypt().getResult();
     }
 
-    public boolean matches(String rawPassword, String encodedPassword) {
+    public boolean verify(String rawPassword, String encodedPassword) {
         return Password.check(rawPassword, encodedPassword).withBCrypt();
     }
 }

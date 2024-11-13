@@ -19,10 +19,16 @@ public class UserServiceImpl implements UserService{
     @Override
     public void create(User user) throws Exception {
         if (userRepository.findByUsername(user.getUsername()) != null) {
-            throw new Exception("Username already exists");
+            throw new Exception("Usuario ya existente");
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }
+
+    @Override
+    public User findByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
+
 }
     
