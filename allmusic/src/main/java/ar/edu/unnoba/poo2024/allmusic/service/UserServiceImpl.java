@@ -5,7 +5,8 @@ import org.springframework.stereotype.Service;
 
 import ar.edu.unnoba.poo2024.allmusic.model.User;
 import ar.edu.unnoba.poo2024.allmusic.repository.UserRepository;
-import ar.edu.unnoba.poo2024.allmusic.util.PasswordEncoder;
+import ar.edu.unnoba.poo2024.allmusic.util.PasswordEncoderConfig;
+
 
 @Service
 public class UserServiceImpl implements UserService{
@@ -14,14 +15,14 @@ public class UserServiceImpl implements UserService{
     private UserRepository userRepository;
     
     @Autowired
-    private PasswordEncoder passwordEncoder;
-
+    private PasswordEncoderConfig.Password4jEncoder password4jEncoder;
+    
     @Override
     public void create(User user) throws Exception {
         if (userRepository.findByUsername(user.getUsername()) != null) {
-            throw new Exception("Username already exists");
+            throw new Exception("User ya existe");
         }
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setPassword(password4jEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }
 }

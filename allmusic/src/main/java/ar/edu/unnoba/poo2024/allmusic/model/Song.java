@@ -17,7 +17,8 @@ public class Song {
     private Genre genre;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    private MusicArtistUser author;
+    @JoinColumn(name = "artist_id", nullable = false)
+    private MusicArtistUser artist;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

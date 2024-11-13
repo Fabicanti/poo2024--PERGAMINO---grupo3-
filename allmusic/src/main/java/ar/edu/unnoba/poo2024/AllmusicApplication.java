@@ -11,12 +11,7 @@ public class AllmusicApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(AllmusicApplication.class, args);
 	}
-
-	@Bean
-	public String passwordEncoder() {
-		return "passwordEncoder";
-	}
-
+	
 	@Bean
     public ModelMapper modelMapper() {
         return new ModelMapper();
