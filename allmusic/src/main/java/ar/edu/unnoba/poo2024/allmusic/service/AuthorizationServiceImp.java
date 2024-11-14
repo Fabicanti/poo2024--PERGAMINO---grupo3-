@@ -1,7 +1,6 @@
 package ar.edu.unnoba.poo2024.allmusic.service;
 
 import org.springframework.stereotype.Service;
-
 import ar.edu.unnoba.poo2024.allmusic.model.User;
 import ar.edu.unnoba.poo2024.allmusic.util.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -14,3 +14,4 @@ public class PasswordEncoder {
         return Password.check(rawPassword, encodedPassword).withBCrypt();
     }
 }
+

@@ -2,12 +2,9 @@ package ar.edu.unnoba.poo2024.allmusic.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import ar.edu.unnoba.poo2024.allmusic.model.User;
 import ar.edu.unnoba.poo2024.allmusic.repository.UserRepository;
-
-import ar.edu.unnoba.poo2024.allmusic.util.PasswordEncoderConfig;
-
+import ar.edu.unnoba.poo2024.allmusic.util.PasswordEncoder;
 
 @Service
 public class UserServiceImpl implements UserService{
@@ -17,7 +14,7 @@ public class UserServiceImpl implements UserService{
     
     @Autowired
 
-    private PasswordEncoderConfig.Password4jEncoder password4jEncoder;
+    private PasswordEncoder password4jEncoder;
     
     @Override
     public void create(User user) throws Exception {

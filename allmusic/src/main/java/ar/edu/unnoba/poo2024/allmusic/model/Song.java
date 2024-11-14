@@ -10,6 +10,7 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @Builder
+@Table(name = "songs")
 public class Song {
     
     @Enumerated(EnumType.STRING)

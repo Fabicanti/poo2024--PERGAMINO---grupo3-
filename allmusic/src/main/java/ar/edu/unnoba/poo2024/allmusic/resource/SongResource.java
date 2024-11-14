@@ -33,8 +33,9 @@ public class SongResource {
     public ResponseEntity<?> getSongs(@RequestHeader("Authorization") String tokenJWT,
                                       @RequestBody Map<String, Object> requestBody) {
         try {
+
             // Validar el token JWT
-            authorizationService.validateToken(tokenJWT);
+            authorizationService.verify(tokenJWT);
 
             // Obtener todas las instancias de Song
             List<SongResponseDTO> songs = songService.getAllSongs();
