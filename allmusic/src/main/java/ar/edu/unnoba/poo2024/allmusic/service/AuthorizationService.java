@@ -3,4 +3,5 @@ import ar.edu.unnoba.poo2024.allmusic.model.User;
 
 public interface AuthorizationService {
     User authorize(String token) throws Exception;
+    void verify(String token);
 }

@@ -1,4 +1,5 @@
 package ar.edu.unnoba.poo2024.allmusic.service;
+
 import org.springframework.stereotype.Service;
 import ar.edu.unnoba.poo2024.allmusic.model.User;
 import ar.edu.unnoba.poo2024.allmusic.util.JwtTokenUtil;
@@ -15,7 +16,7 @@ public class AuthorizationServiceImp implements AuthorizationService {
 
     @Override
     public User authorize(String token) throws Exception {
-        if (!jwtTokenUtil.verify(token)) {
+        if (!jwtTokenUtil.validateToken(token)) {
             throw new Exception("Invalid token");
         }
         String username = jwtTokenUtil.getSubject(token);
@@ -24,5 +25,12 @@ public class AuthorizationServiceImp implements AuthorizationService {
             throw new Exception("User not found");
         }
         return user;
+    }
+
+    @Override
+    public void verify(String token) {
+        if (!jwtTokenUtil.validateToken(token)) {
+            throw new RuntimeException("Invalid token");
+        }
     }
 }

@@ -22,7 +22,7 @@ public class JwtTokenUtil {
                 .sign(ALGORITHM);
     }
 
-    public boolean verify(String token) {
+    public boolean validateToken(String token) {
         try {
             JWTVerifier verifier = JWT.require(ALGORITHM).build();
             verifier.verify(token);
@@ -37,4 +37,3 @@ public class JwtTokenUtil {
         return decodedJWT.getSubject();
     }
 }
-

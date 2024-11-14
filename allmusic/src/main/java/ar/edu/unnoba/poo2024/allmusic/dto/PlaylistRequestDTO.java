@@ -1,7 +1,7 @@
 package ar.edu.unnoba.poo2024.allmusic.dto;
 
-import ar.edu.unnoba.poo2024.allmusic.model.Genre;
-import ar.edu.unnoba.poo2024.allmusic.model.MusicArtistUser;
+import java.util.List;
+import ar.edu.unnoba.poo2024.allmusic.model.Song;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,10 +11,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class SongResponseDTO {
-
-    private Long id;
+public class PlaylistRequestDTO {
     private String name;
-    private Genre genre;
-    private MusicArtistUser artist;
+    private List<Song> songs;
 }

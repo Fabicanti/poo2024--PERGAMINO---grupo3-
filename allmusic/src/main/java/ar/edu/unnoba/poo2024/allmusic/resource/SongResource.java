@@ -1,39 +1,34 @@
 package ar.edu.unnoba.poo2024.allmusic.resource;
 
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+import ar.edu.unnoba.poo2024.allmusic.dto.SongResponseDTO;
+import ar.edu.unnoba.poo2024.allmusic.service.SongService;
+import ar.edu.unnoba.poo2024.allmusic.service.AuthorizationService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import ar.edu.unnoba.poo2024.allmusic.dto.SongResponseDTO;
-import ar.edu.unnoba.poo2024.allmusic.service.SongService;
-import ar.edu.unnoba.poo2024.allmusic.util.JwtTokenUtil;
-import org.modelmapper.ModelMapper;
+import org.springframework.web.bind.annotation.*;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/song")
+@RequestMapping("/api/song")
 public class SongResource {
 
     @Autowired
     private SongService songService;
 
     @Autowired
-    private JwtTokenUtil authorizationService;
+    private AuthorizationService authorizationService;
 
     @Autowired
-    private ModelMapper modelMapper = new ModelMapper();
+    private ModelMapper modelMapper;
 
     @GetMapping("/songs")
     public ResponseEntity<?> getSongs(@RequestHeader("Authorization") String tokenJWT,
                                       @RequestBody Map<String, Object> requestBody) {
         try {
-
             // Validar el token JWT
             authorizationService.verify(tokenJWT);
 

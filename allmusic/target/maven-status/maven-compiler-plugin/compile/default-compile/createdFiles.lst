@@ -2,6 +2,8 @@ ar\edu\unnoba\poo2024\allmusic\util\JwtTokenUtil.class
 ar\edu\unnoba\poo2024\allmusic\service\UserService.class
 ar\edu\unnoba\poo2024\allmusic\resource\MusicArtistUserResource.class
 ar\edu\unnoba\poo2024\allmusic\repository\SongRepository.class
+ar\edu\unnoba\poo2024\allmusic\dto\PlaylistResponseDTO.class
+ar\edu\unnoba\poo2024\allmusic\resource\AuthenticationResource.class
 ar\edu\unnoba\poo2024\allmusic\resource\MusicEnthusiastUserResource.class
 ar\edu\unnoba\poo2024\allmusic\service\SongServiceImpl.class
 ar\edu\unnoba\poo2024\allmusic\model\Song.class
@@ -15,11 +17,13 @@ ar\edu\unnoba\poo2024\allmusic\repository\PlaylistRepository.class
 ar\edu\unnoba\poo2024\allmusic\dto\AuthenticationRequestDTO.class
 ar\edu\unnoba\poo2024\allmusic\model\Genre.class
 ar\edu\unnoba\poo2024\allmusic\util\ResourceNotFoundException.class
+ar\edu\unnoba\poo2024\allmusic\dto\PlaylistRequestDTO.class
 ar\edu\unnoba\poo2024\allmusic\service\AuthenticationService.class
 ar\edu\unnoba\poo2024\allmusic\model\User.class
 ar\edu\unnoba\poo2024\AllmusicApplication.class
 ar\edu\unnoba\poo2024\allmusic\model\PlayList$PlayListBuilder.class
 ar\edu\unnoba\poo2024\allmusic\dto\SongRequestDTO.class
+ar\edu\unnoba\poo2024\allmusic\resource\UserResource.class
 ar\edu\unnoba\poo2024\allmusic\service\PlaylistService.class
 ar\edu\unnoba\poo2024\allmusic\repository\UserRepository.class
 ar\edu\unnoba\poo2024\allmusic\service\SongService.class

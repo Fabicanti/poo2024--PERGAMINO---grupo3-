@@ -5,6 +5,7 @@ CREATE TABLE users (
     user_type VARCHAR(31) NOT NULL
 );
 
+
 -- Tabla para MusicEnthusiastUser
 CREATE TABLE music_enthusiast_users (
     id BIGINT PRIMARY KEY,

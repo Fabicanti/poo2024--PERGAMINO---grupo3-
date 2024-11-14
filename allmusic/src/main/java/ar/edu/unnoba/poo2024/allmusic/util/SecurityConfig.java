@@ -17,10 +17,12 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests()
-            .requestMatchers("/api/auth/**").permitAll()
+            .requestMatchers("/api/auth/**", "/api/users/**", "/api/song/**", "/api/enthusiast/**", "/api/artist/**", "/h2-console/**").permitAll()
             .anyRequest().authenticated()
             .and()
             .csrf().disable() // Desactiva CSRF para simplificar en APIs REST
+            .headers().frameOptions().sameOrigin() // Permite que la consola H2 se cargue en un iframe
+            .and()
             .httpBasic(); // Autenticación básica para facilitar el proceso sin un formulario
 
         return http.build();

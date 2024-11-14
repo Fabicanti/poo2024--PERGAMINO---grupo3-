@@ -1,7 +1,8 @@
 -- Insertar usuarios
 INSERT INTO users (id, username, password, user_type) VALUES
-(1, 'artist_user', 'password123', 'Artist'),
-(2, 'enthusiast_user', 'password', 'Enthusiast');
+(1, 'user', '123', 'Enthusiast'),
+(2, 'artist_user', 'password123', 'Artist'),
+(3, 'enthusiast_user', 'password', 'Enthusiast');
 
 -- Insertar en music_artist_users
 INSERT INTO music_artist_users (id) VALUES

@@ -1,6 +1,7 @@
 package ar.edu.unnoba.poo2024.allmusic.model;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,6 +11,7 @@ import lombok.Setter;
 @Entity
 @DiscriminatorValue("Artist")
 @NoArgsConstructor
+@AllArgsConstructor
 public class MusicArtistUser extends User{
 
     private String artistName;

@@ -14,7 +14,6 @@ import lombok.AllArgsConstructor;
 public class SongRequestDTO {
 
     private MusicArtistUser artist;
-    private Long id;
     private Genre genre;
     private String name;
 }
