@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import ar.edu.unnoba.poo2024.allmusic.model.User;
 import ar.edu.unnoba.poo2024.allmusic.repository.UserRepository;
+
 import ar.edu.unnoba.poo2024.allmusic.util.PasswordEncoderConfig;
 
 
@@ -15,6 +16,7 @@ public class UserServiceImpl implements UserService{
     private UserRepository userRepository;
     
     @Autowired
+
     private PasswordEncoderConfig.Password4jEncoder password4jEncoder;
     
     @Override
@@ -25,5 +27,11 @@ public class UserServiceImpl implements UserService{
         user.setPassword(password4jEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }
+
+    @Override
+    public User findByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
+
 }
     
