@@ -20,6 +20,7 @@ public class Song {
     @JoinColumn(name = "artist_id", nullable = false)
     private MusicArtistUser artist;
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

@@ -93,6 +93,7 @@
 			<artifactId>java-jwt</artifactId>
 			<version>3.18.2</version>
 		</dependency>
+
 	</dependencies>
 
 	<build>
