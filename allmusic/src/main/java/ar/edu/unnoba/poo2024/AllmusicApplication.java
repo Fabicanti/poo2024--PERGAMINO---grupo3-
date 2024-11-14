@@ -11,10 +11,8 @@ public class AllmusicApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(AllmusicApplication.class, args);
 	}
-
-
 	@Bean
-    public ModelMapper modelMapper() {
-        return new ModelMapper();
-    }
+  public ModelMapper modelMapper() {
+      return new ModelMapper();
+  }
 }
