@@ -7,7 +7,7 @@ import com.password4j.Password;
 public class PasswordEncoder {
 
     public String encode(String rawPassword) {
-        return Password.hash(rawPassword).addSalt("someSalt").withBCrypt().getResult();
+        return Password.hash(rawPassword).withBCrypt().getResult();
     }
 
     public boolean verify(String rawPassword, String encodedPassword) {

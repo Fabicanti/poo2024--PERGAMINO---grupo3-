@@ -1,11 +1,10 @@
 package ar.edu.unnoba.poo2024.allmusic.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import ar.edu.unnoba.poo2024.allmusic.model.User;
 import ar.edu.unnoba.poo2024.allmusic.util.JwtTokenUtil;
 import ar.edu.unnoba.poo2024.allmusic.util.PasswordEncoder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 public class AuthenticationServiceImp implements AuthenticationService {
@@ -25,7 +24,8 @@ public class AuthenticationServiceImp implements AuthenticationService {
         if (existingUser == null || !passwordEncoder.verify(user.getPassword(), existingUser.getPassword())) {
             throw new Exception("Invalid credentials");
         }
-        return jwtTokenUtil.generateToken(existingUser.getUsername());
+        return "Bearer " + jwtTokenUtil.generateToken(existingUser.getUsername());
     }
 }
+
 

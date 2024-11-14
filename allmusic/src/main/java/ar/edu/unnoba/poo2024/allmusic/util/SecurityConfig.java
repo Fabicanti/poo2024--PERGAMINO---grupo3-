@@ -16,14 +16,12 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            .authorizeHttpRequests((requests) -> requests
-                .requestMatchers("/h2-console/**").authenticated()  // Requiere autenticación para la consola de H2
-                .requestMatchers("/favicon.ico", "/static/**", "/public/**", "/css/**", "/js/**", "/error").permitAll()  // Rutas públicas sin autenticación
-                .anyRequest().authenticated()  // El resto de las solicitudes requieren autenticación
-            )
-            .csrf((csrf) -> csrf.disable())  // Desactiva CSRF para la consola de H2
-            .headers((headers) -> headers.frameOptions((frameOptions) -> frameOptions.sameOrigin()))  // Permite cargar el iframe de la consola de H2
-            .formLogin();  // Habilita el formulario de inicio de sesión predeterminado
+            .authorizeHttpRequests()
+            .requestMatchers("/api/auth/**").permitAll()
+            .anyRequest().authenticated()
+            .and()
+            .csrf().disable() // Desactiva CSRF para simplificar en APIs REST
+            .httpBasic(); // Autenticación básica para facilitar el proceso sin un formulario
 
         return http.build();
     }
@@ -32,9 +30,10 @@ public class SecurityConfig {
     public UserDetailsService userDetailsService() {
         InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
         manager.createUser(User.withUsername("user")
-            .password("{noop}password")  // {noop} indica que no se usará ningún codificador de contraseñas
+            .password("{noop}123") // {noop} indica que no se usará ningún codificador de contraseñas
             .roles("USER")
             .build());
         return manager;
     }
 }
+
