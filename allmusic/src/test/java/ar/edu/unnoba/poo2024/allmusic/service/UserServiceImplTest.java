@@ -1,4 +1,5 @@
-/*package ar.edu.unnoba.poo2024.allmusic.service;
+/*
+package ar.edu.unnoba.poo2024.allmusic.service;
 
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -28,7 +29,7 @@ public class UserServiceImplTest {
     private ModelMapper modelMapper;
 
     @Mock
-    private PasswordEncoder password4jEncoder;
+    private PasswordEncoder passwordEncoder;
 
     @InjectMocks
     private UserServiceImpl userService;
@@ -41,18 +42,20 @@ public class UserServiceImplTest {
     @Test
     public void testCreateUser() throws Exception {
         CreateUserRequestDTO requestDTO = new CreateUserRequestDTO("testuser", "password");
-        MusicEnthusiastUser user = new MusicEnthusiastUser("testuser", "password");
+        MusicEnthusiastUser user = new MusicEnthusiastUser();
+        user.setUsername("testuser");
+        user.setPassword("password");
 
         when(modelMapper.map(requestDTO, MusicEnthusiastUser.class)).thenReturn(user);
-        when(password4jEncoder.encode("password")).thenReturn("encodedPassword");
-        when(userRepository.save(user)).thenReturn(user);
+        when(passwordEncoder.encode("password")).thenReturn("encodedPassword");
+        when(userRepository.save(any(User.class))).thenAnswer(invocation -> invocation.getArgument(0));
 
         User createdUser = userService.create(requestDTO);
 
         assertNotNull(createdUser);
         assertEquals("testuser", createdUser.getUsername());
         assertEquals("encodedPassword", createdUser.getPassword());
-        verify(userRepository, times(1)).save(user);
+        verify(userRepository, times(1)).save(createdUser);
     }
 
     @Test
@@ -74,4 +77,4 @@ public class UserServiceImplTest {
         assertThrows(ResourceNotFoundException.class, () -> userService.findByUsername("testuser"));
     }
 }
-*/
+ */

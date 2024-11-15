@@ -12,7 +12,7 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @Builder
-@Table(name = "playlists")
+@Table(name = "playlist")
 public class PlayList {
     
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})

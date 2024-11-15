@@ -40,7 +40,7 @@ public class SongServiceImplTest {
 
     @Test
     public void testCreateSong() {
-        MusicArtistUser artist = new MusicArtistUser("artist_username", "artist_password", "artist_name");
+        MusicArtistUser artist = new MusicArtistUser("artist_username", "artist_password");
         Genre genre = Genre.ROCK;
         SongRequestDTO requestDTO = new SongRequestDTO(artist, genre, "Test Song");
         Song song = new Song();
@@ -60,7 +60,7 @@ public class SongServiceImplTest {
 
     @Test
     public void testGetSongById() {
-        MusicArtistUser artist = new MusicArtistUser("artist_username", "artist_password", "artist_name");
+        MusicArtistUser artist = new MusicArtistUser("artist_username", "artist_password");
         Genre genre = Genre.ROCK;
         Song song = new Song();
         song.setId(1L);
@@ -79,8 +79,8 @@ public class SongServiceImplTest {
 
     @Test
     public void testGetAllSongs() {
-        MusicArtistUser artist1 = new MusicArtistUser("artist1_username", "artist1_password", "artist1_name");
-        MusicArtistUser artist2 = new MusicArtistUser("artist2_username", "artist2_password", "artist2_name");
+        MusicArtistUser artist1 = new MusicArtistUser("artist1_username", "artist1_password");
+        MusicArtistUser artist2 = new MusicArtistUser("artist2_username", "artist2_password");
         Genre genre1 = Genre.ROCK;
         Genre genre2 = Genre.POP;
 
@@ -108,7 +108,7 @@ public class SongServiceImplTest {
 
     @Test
     public void testUpdateSong() {
-        MusicArtistUser artist = new MusicArtistUser("artist_username", "artist_password", "artist_name");
+        MusicArtistUser artist = new MusicArtistUser("artist_username", "artist_password");
         Genre genre = Genre.ROCK;
         SongRequestDTO requestDTO = new SongRequestDTO(artist, genre, "Updated Song");
         Song song = new Song();
