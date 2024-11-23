@@ -6,13 +6,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class PasswordEncoderTest {
-
-    private PasswordEncoder passwordEncoder;
+    private CustomPasswordEncoder passwordEncoder;
 
     @BeforeEach
     public void setUp() {
-        passwordEncoder = new PasswordEncoder();
+        passwordEncoder = new CustomPasswordEncoder();
     }
+    
 
     @Test
     public void testEncode() {

@@ -1,0 +1,35 @@
+spring:
+    application:
+        name: allmusic
+    datasource:
+        url: jdbc:h2:mem:allmusicdb
+        driver-class-name: org.h2.Driver
+        username: allmusic
+        password: ''
+    jpa:
+        database-platform: org.hibernate.dialect.H2Dialect
+        hibernate:
+            ddl-auto: create-drop
+        show-sql: true
+        defer-datasource-initialization: true
+    h2:
+        console:
+            enabled: true
+            path: /h2-console
+    security:
+        oauth2:
+            resourceserver:
+                jwt:
+                    issuer-uri: https://dev-123456.okta.com/oauth2/default
+                    jwk-set-uri: "https://example.com/.well-known/jwks.json"  # URL to the JSON Web Key Set
+server:
+  port: 8080
+logging:
+  file:
+    name: logs/spring-boot-application.log
+  level:
+    '[org.h2]': TRACE
+    '[org.springframework.boot]': DEBUG
+    '[org.springframework.security]': DEBUG
+    '[org.springframework.web]': DEBUG
+    root: INFO

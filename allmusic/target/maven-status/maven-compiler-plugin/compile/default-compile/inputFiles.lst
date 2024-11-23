@@ -5,6 +5,7 @@ D:\Unnoba\Programacion Orientada a Ojetos\poo2024--PERGAMINO---grupo3-\allmusic\
 D:\Unnoba\Programacion Orientada a Ojetos\poo2024--PERGAMINO---grupo3-\allmusic\src\main\java\ar\edu\unnoba\poo2024\allmusic\service\PlaylistService.java
 D:\Unnoba\Programacion Orientada a Ojetos\poo2024--PERGAMINO---grupo3-\allmusic\src\main\java\ar\edu\unnoba\poo2024\allmusic\service\PlaylistServiceImpl.java
 D:\Unnoba\Programacion Orientada a Ojetos\poo2024--PERGAMINO---grupo3-\allmusic\src\main\java\ar\edu\unnoba\poo2024\allmusic\util\ResourceNotFoundException.java
+D:\Unnoba\Programacion Orientada a Ojetos\poo2024--PERGAMINO---grupo3-\allmusic\src\main\java\ar\edu\unnoba\poo2024\allmusic\util\JwtFilter.java
 D:\Unnoba\Programacion Orientada a Ojetos\poo2024--PERGAMINO---grupo3-\allmusic\src\main\java\ar\edu\unnoba\poo2024\AllmusicApplication.java
 D:\Unnoba\Programacion Orientada a Ojetos\poo2024--PERGAMINO---grupo3-\allmusic\src\main\java\ar\edu\unnoba\poo2024\allmusic\repository\UserRepository.java
 D:\Unnoba\Programacion Orientada a Ojetos\poo2024--PERGAMINO---grupo3-\allmusic\src\main\java\ar\edu\unnoba\poo2024\allmusic\resource\AuthenticationResource.java
@@ -26,7 +27,7 @@ D:\Unnoba\Programacion Orientada a Ojetos\poo2024--PERGAMINO---grupo3-\allmusic\
 D:\Unnoba\Programacion Orientada a Ojetos\poo2024--PERGAMINO---grupo3-\allmusic\src\main\java\ar\edu\unnoba\poo2024\allmusic\resource\MusicEnthusiastUserResource.java
 D:\Unnoba\Programacion Orientada a Ojetos\poo2024--PERGAMINO---grupo3-\allmusic\src\main\java\ar\edu\unnoba\poo2024\allmusic\resource\UserResource.java
 D:\Unnoba\Programacion Orientada a Ojetos\poo2024--PERGAMINO---grupo3-\allmusic\src\main\java\ar\edu\unnoba\poo2024\allmusic\service\SongServiceImpl.java
-D:\Unnoba\Programacion Orientada a Ojetos\poo2024--PERGAMINO---grupo3-\allmusic\src\main\java\ar\edu\unnoba\poo2024\allmusic\util\PasswordEncoder.java
+D:\Unnoba\Programacion Orientada a Ojetos\poo2024--PERGAMINO---grupo3-\allmusic\src\main\java\ar\edu\unnoba\poo2024\allmusic\util\CustomPasswordEncoder.java
 D:\Unnoba\Programacion Orientada a Ojetos\poo2024--PERGAMINO---grupo3-\allmusic\src\main\java\ar\edu\unnoba\poo2024\allmusic\dto\CreateUserRequestDTO.java
 D:\Unnoba\Programacion Orientada a Ojetos\poo2024--PERGAMINO---grupo3-\allmusic\src\main\java\ar\edu\unnoba\poo2024\allmusic\model\Genre.java
 D:\Unnoba\Programacion Orientada a Ojetos\poo2024--PERGAMINO---grupo3-\allmusic\src\main\java\ar\edu\unnoba\poo2024\allmusic\resource\SongResource.java

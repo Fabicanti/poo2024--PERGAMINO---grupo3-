@@ -5,20 +5,25 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.auth0.jwt.interfaces.JWTVerifier;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
+import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 @Component
 public class JwtTokenUtil {
 
-    private static final String SECRET_KEY = "your-secret-key"; // Cambia a una clave segura
+    private static final String SECRET_KEY = "gHuD8bX5V2aR9zQ1LpNcKoJe3WyMfTbCv"; // Cambia a una clave segura
     private static final Algorithm ALGORITHM = Algorithm.HMAC512(SECRET_KEY);
 
-    public String generateToken(String subject) {
+    public String generateToken(String subject, String userType) {
         return JWT.create()
                 .withSubject(subject)
                 .withExpiresAt(new Date(System.currentTimeMillis() + 10 * 24 * 60 * 60 * 1000)) // Expira en 10 días
+                .withClaim("role", userType)
                 .sign(ALGORITHM);
     }
 
@@ -35,5 +40,13 @@ public class JwtTokenUtil {
     public String getSubject(String token) {
         DecodedJWT decodedJWT = JWT.decode(token);
         return decodedJWT.getSubject();
+    }
+
+    public Collection<? extends GrantedAuthority> getAuthorities(String token) {
+        DecodedJWT decodedJWT = JWT.decode(token);
+        String role = decodedJWT.getClaim("role").asString();
+        return role != null ? 
+                List.of(new SimpleGrantedAuthority(role)) : 
+                List.of();
     }
 }

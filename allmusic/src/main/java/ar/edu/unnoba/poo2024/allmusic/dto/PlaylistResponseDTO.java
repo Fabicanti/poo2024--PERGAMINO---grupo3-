@@ -16,3 +16,4 @@ public class PlaylistResponseDTO {
     private String name;
     private List<Song> songs;
 }
+

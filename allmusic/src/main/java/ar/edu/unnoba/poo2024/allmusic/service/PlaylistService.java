@@ -9,4 +9,5 @@ public interface PlaylistService {
     List<PlaylistResponseDTO> getAllPlaylists();
     PlaylistResponseDTO updatePlaylist(Long playlistId, PlaylistRequestDTO playlistRequestDTO);
     void deletePlaylist(Long playlistId);
+    void addSongToPlaylist(Long playlistId, Long songId);
 }

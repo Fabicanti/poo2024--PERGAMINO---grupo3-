@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 import ar.edu.unnoba.poo2024.allmusic.dto.PlaylistRequestDTO;
 import ar.edu.unnoba.poo2024.allmusic.dto.PlaylistResponseDTO;
 import ar.edu.unnoba.poo2024.allmusic.model.PlayList;
+import ar.edu.unnoba.poo2024.allmusic.model.Song;
 import ar.edu.unnoba.poo2024.allmusic.repository.PlaylistRepository;
+import ar.edu.unnoba.poo2024.allmusic.repository.SongRepository;
 import ar.edu.unnoba.poo2024.allmusic.util.ResourceNotFoundException;
 
 @Service
@@ -17,6 +19,9 @@ public class PlaylistServiceImpl implements PlaylistService {
     @Autowired
     private PlaylistRepository playlistRepository;
 
+    @Autowired
+    private SongRepository songRepository;
+    
     @Autowired
     private ModelMapper modelMapper;
 
@@ -60,5 +65,15 @@ public class PlaylistServiceImpl implements PlaylistService {
             throw new ResourceNotFoundException("Playlist not found");
         }
         playlistRepository.deleteById(playlistId);
+    }
+
+    @Override
+    public void addSongToPlaylist(Long playlistId, Long songId) {
+        PlayList playlist = playlistRepository.findById(playlistId)
+                .orElseThrow(() -> new ResourceNotFoundException("Playlist not found"));
+        Song song = songRepository.findById(songId)
+                .orElseThrow(() -> new ResourceNotFoundException("Song not found"));
+        playlist.getSongs().add(song);
+        playlistRepository.save(playlist);
     }
 }

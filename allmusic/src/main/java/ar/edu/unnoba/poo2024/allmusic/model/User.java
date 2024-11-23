@@ -30,4 +30,14 @@ public abstract class User {
   }
 
   public abstract boolean canCreateSongs();
+
+  @Transient
+  public String getUserType() {
+    if (this instanceof MusicEnthusiastUser) {
+      return "Enthusiast";
+    } else if (this instanceof MusicArtistUser) {
+      return "Artist";
+    }
+    return "Unknown";
+  }
 }

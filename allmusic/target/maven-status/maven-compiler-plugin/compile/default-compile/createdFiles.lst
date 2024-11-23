@@ -8,7 +8,6 @@ ar\edu\unnoba\poo2024\allmusic\resource\MusicEnthusiastUserResource.class
 ar\edu\unnoba\poo2024\allmusic\service\SongServiceImpl.class
 ar\edu\unnoba\poo2024\allmusic\model\Song.class
 ar\edu\unnoba\poo2024\allmusic\model\PlayList.class
-ar\edu\unnoba\poo2024\allmusic\util\PasswordEncoder.class
 ar\edu\unnoba\poo2024\allmusic\model\MusicArtistUser.class
 ar\edu\unnoba\poo2024\allmusic\model\Song$SongBuilder.class
 ar\edu\unnoba\poo2024\allmusic\service\UserServiceImpl.class
@@ -30,8 +29,10 @@ ar\edu\unnoba\poo2024\allmusic\service\SongService.class
 ar\edu\unnoba\poo2024\allmusic\util\SecurityConfig.class
 ar\edu\unnoba\poo2024\allmusic\model\MusicEnthusiastUser.class
 ar\edu\unnoba\poo2024\allmusic\dto\CreateUserRequestDTO.class
+ar\edu\unnoba\poo2024\allmusic\util\JwtFilter.class
 ar\edu\unnoba\poo2024\allmusic\service\AuthenticationServiceImp.class
 ar\edu\unnoba\poo2024\allmusic\service\AuthorizationService.class
 ar\edu\unnoba\poo2024\allmusic\service\AuthorizationServiceImp.class
 ar\edu\unnoba\poo2024\allmusic\resource\SongResource.class
+ar\edu\unnoba\poo2024\allmusic\util\CustomPasswordEncoder.class
 ar\edu\unnoba\poo2024\allmusic\dto\SongResponseDTO.class

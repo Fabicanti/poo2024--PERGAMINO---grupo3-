@@ -1,7 +1,7 @@
 -- Insertar usuarios
 INSERT INTO users (username, password, user_type) VALUES
-('artist_user', '$2a$10$VfCvh5IHJgf0iJjv8.xi9.tgJNHiq7woAbjQAh0DgRVGz2Hq9sdK2', 'Artist'),
-('enthusiast_user', '$2a$10$XjGzTiU9sYs.j0G8qvh9NuFPC.HoDzEP1pzvR1UHwXIzFuWXYI17m', 'Enthusiast');
+('artist_user', '$2b$10$fYdgiFkOYBtdaYa1ptujt.OXVaDgw9ud4VczrvYTXHKAdY6oeiBx2', 'Artist'), -- password_artist
+('enthusiast_user', '$2b$12$9K7qBtHXu.Nh0TL/ob3xiuMvqMJD/P9IRHY6C2ZgM29.tB9/Vvc3m', 'Enthusiast'); -- password_enthusiast
 
 -- Insertar en music_artist_users
 INSERT INTO music_artist_user (id) VALUES

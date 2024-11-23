@@ -18,6 +18,8 @@ public class UserResource {
     public ResponseEntity<?> getUserByUsername(@PathVariable String username) {
         try {
             User user = userService.findByUsername(username);
+            // Log de verificación
+            System.out.println("Usuario encontrado: " + user);
             if (user != null) {
                 return new ResponseEntity<>(user, HttpStatus.OK);
             } else {

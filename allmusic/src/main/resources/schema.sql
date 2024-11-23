@@ -1,4 +1,4 @@
-CREATE TABLE users (
+CREATE TABLE IF NOT EXISTS users (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(255) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
@@ -7,19 +7,19 @@ CREATE TABLE users (
 
 
 -- Tabla para MusicEnthusiastUser
-CREATE TABLE music_enthusiast_user (
+CREATE TABLE IF NOT EXISTS music_enthusiast_user (
     id BIGINT PRIMARY KEY,
     FOREIGN KEY (id) REFERENCES users(id)
 );
 
 -- Tabla para MusicArtistUser
-CREATE TABLE music_artist_user (
+CREATE TABLE IF NOT EXISTS music_artist_user (
     id BIGINT PRIMARY KEY,
     FOREIGN KEY (id) REFERENCES users(id)
 );
 
 -- Tabla para Song
-CREATE TABLE song (
+CREATE TABLE IF NOT EXISTS song (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     genre VARCHAR(31) NOT NULL,
@@ -28,7 +28,7 @@ CREATE TABLE song (
 );
 
 -- Tabla para PlayList
-CREATE TABLE playlist (
+CREATE TABLE IF NOT EXISTS playlist (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     owner_id BIGINT NOT NULL,
@@ -36,7 +36,7 @@ CREATE TABLE playlist (
 );
 
 -- Tabla intermedia para la relación Many-to-Many entre PlayList y Song
-CREATE TABLE playlist_songs (
+CREATE TABLE IF NOT EXISTS playlist_songs (
     playlist_id BIGINT NOT NULL,
     song_id BIGINT NOT NULL,
     PRIMARY KEY (playlist_id, song_id),

@@ -15,3 +15,4 @@ public class PlaylistRequestDTO {
     private String name;
     private List<Song> songs;
 }
+
