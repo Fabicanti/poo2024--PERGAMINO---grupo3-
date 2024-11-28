@@ -15,15 +15,10 @@ public class AuthenticationResource {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody AuthenticationRequestDTO request) {
-        // Log de verificación
-        System.out.println("Autenticando usuario: " + request.getUsername());
-        System.out.println("Contraseña: " + request.getPassword());
         try {
             String token = authenticationService.authenticate(request);
             return ResponseEntity.ok().header("Authorization", token).body(Map.of("message", "Login successful", "token", token));
         } catch (Exception e) {
-            // Log de verificación
-            System.out.println("token: " + e.getMessage());
             return ResponseEntity.status(401).body("Invalid credentials");
         }
     }

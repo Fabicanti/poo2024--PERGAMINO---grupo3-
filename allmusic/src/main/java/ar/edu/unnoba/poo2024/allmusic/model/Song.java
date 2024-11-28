@@ -12,12 +12,12 @@ import lombok.*;
 @Builder
 @Table(name = "song")
 public class Song {
-    
+     
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Genre genre;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.DETACH})
     @JoinColumn(name = "artist_id", nullable = false)
     private MusicArtistUser artist;
 

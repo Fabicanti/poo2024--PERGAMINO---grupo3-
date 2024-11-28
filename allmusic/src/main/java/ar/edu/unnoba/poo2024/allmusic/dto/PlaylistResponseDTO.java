@@ -12,8 +12,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PlaylistResponseDTO {
+    private List<Song> songs;
     private Long id;
     private String name;
-    private List<Song> songs;
 }
 

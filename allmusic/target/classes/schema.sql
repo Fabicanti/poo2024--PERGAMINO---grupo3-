@@ -40,6 +40,6 @@ CREATE TABLE IF NOT EXISTS playlist_songs (
     playlist_id BIGINT NOT NULL,
     song_id BIGINT NOT NULL,
     PRIMARY KEY (playlist_id, song_id),
-    FOREIGN KEY (playlist_id) REFERENCES playlist(id),
-    FOREIGN KEY (song_id) REFERENCES song(id)
+    FOREIGN KEY (playlist_id) REFERENCES playlist(id) ON DELETE CASCADE,
+    FOREIGN KEY (song_id) REFERENCES song(id) ON DELETE CASCADE
 );

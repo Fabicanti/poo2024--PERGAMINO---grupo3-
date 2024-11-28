@@ -1,13 +1,15 @@
 package ar.edu.unnoba.poo2024.allmusic.service;
 import java.util.List;
-import ar.edu.unnoba.poo2024.allmusic.dto.PlaylistRequestDTO;
 import ar.edu.unnoba.poo2024.allmusic.dto.PlaylistResponseDTO;
+import ar.edu.unnoba.poo2024.allmusic.dto.PlaylistSummaryDTO;
+import ar.edu.unnoba.poo2024.allmusic.model.User;
 
 public interface PlaylistService {
-    PlaylistResponseDTO createPlaylist(PlaylistRequestDTO playlistRequestDTO);
+    List<PlaylistSummaryDTO> getPlaylistsWithSongCount();
+    void createPlaylist(String playlistName, User owner);
     PlaylistResponseDTO getPlaylistById(Long playlistId);
-    List<PlaylistResponseDTO> getAllPlaylists();
-    PlaylistResponseDTO updatePlaylist(Long playlistId, PlaylistRequestDTO playlistRequestDTO);
-    void deletePlaylist(Long playlistId);
-    void addSongToPlaylist(Long playlistId, Long songId);
+    void updatePlaylistName(Long playlistId, User owner, String playlistName);
+    void deletePlaylist(Long playlistId, User owner);
+    void addSongToPlaylist(Long playlistId, User owner, Long songId);
+    List<PlaylistResponseDTO> getMyPlaylists(User owner);
 }

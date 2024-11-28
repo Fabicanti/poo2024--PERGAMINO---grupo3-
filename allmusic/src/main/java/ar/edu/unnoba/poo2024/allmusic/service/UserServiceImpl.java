@@ -27,18 +27,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public User createArtist(CreateUserRequestDTO createUserRequestDTO) throws Exception {
         MusicArtistUser artistUser = modelMapper.map(createUserRequestDTO, MusicArtistUser.class);
-        System.out.println("Before encoding: " + artistUser.getPassword());
         artistUser.setPassword(passwordEncoder.encode(artistUser.getPassword()));
-        System.out.println("After encoding: " + artistUser.getPassword());
         return userRepository.save(artistUser);
     }
 
     @Override
     public User createEnthusiast(CreateUserRequestDTO createUserRequestDTO) throws Exception {
         MusicEnthusiastUser enthusiastUser = modelMapper.map(createUserRequestDTO, MusicEnthusiastUser.class);
-        System.out.println("Before encoding: " + enthusiastUser.getPassword());
         enthusiastUser.setPassword(passwordEncoder.encode(enthusiastUser.getPassword()));
-        System.out.println("After encoding: " + enthusiastUser.getPassword());
         return userRepository.save(enthusiastUser);
     }
 
@@ -46,6 +42,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findByUsername(String username) {
         return userRepository.findByUsername(username)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+    }
+
+    @Override
+    public User findById(Long id) {
+        return userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));
     }
 

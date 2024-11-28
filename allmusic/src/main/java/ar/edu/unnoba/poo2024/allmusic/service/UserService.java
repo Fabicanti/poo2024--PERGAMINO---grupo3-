@@ -7,5 +7,6 @@ public interface UserService {
 
     User createArtist(CreateUserRequestDTO createUserRequestDTO) throws Exception;
     User createEnthusiast(CreateUserRequestDTO createUserRequestDTO) throws Exception;
-    public User findByUsername(String username);
+    User findByUsername(String username);
+    User findById(Long id);
 }

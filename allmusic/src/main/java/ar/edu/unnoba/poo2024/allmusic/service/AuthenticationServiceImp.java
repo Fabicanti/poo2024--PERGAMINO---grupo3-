@@ -37,6 +37,6 @@ public class AuthenticationServiceImp implements AuthenticationService {
 
         // Generar y devolver el token
         String userType = user.getUserType();
-        return jwtTokenUtil.generateToken(user.getUsername(), userType);
+        return jwtTokenUtil.generateToken(user.getId().toString(), userType);
     }
 }

@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: ar.edu.unnoba.poo2024.allmusic.AllmusicApplicationTests
--------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 9.735 s - in ar.edu.unnoba.poo2024.allmusic.AllmusicApplicationTests

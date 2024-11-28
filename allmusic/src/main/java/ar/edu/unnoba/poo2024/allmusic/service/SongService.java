@@ -11,4 +11,7 @@ public interface SongService {
     List<SongResponseDTO> getAllSongs();
     SongResponseDTO updateSong(Long songId, SongRequestDTO songRequestDTO);
     void deleteSong(Long songId);
+    List<SongResponseDTO> getSongsByArtist(String artistName);
+    List<SongResponseDTO> getSongsByGenre(String genre);
+    List<SongResponseDTO> getSongsByArtistAndGenre(String artistName, String genre);
 }

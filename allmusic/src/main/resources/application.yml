@@ -24,12 +24,4 @@ spring:
                     jwk-set-uri: "https://example.com/.well-known/jwks.json"  # URL to the JSON Web Key Set
 server:
   port: 8080
-logging:
-  file:
-    name: logs/spring-boot-application.log
-  level:
-    '[org.h2]': TRACE
-    '[org.springframework.boot]': DEBUG
-    '[org.springframework.security]': DEBUG
-    '[org.springframework.web]': DEBUG
-    root: INFO
+

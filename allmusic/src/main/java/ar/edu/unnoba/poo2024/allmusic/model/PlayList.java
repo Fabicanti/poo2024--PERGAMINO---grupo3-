@@ -15,15 +15,16 @@ import lombok.*;
 @Table(name = "playlist")
 public class PlayList {
     
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-	@JoinTable(name = "PlayList_Songs",
-		joinColumns = @JoinColumn(name = "playlist"),
-		inverseJoinColumns = @JoinColumn(name = "song")
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
+	@JoinTable(name = "playlist_songs",
+		joinColumns = @JoinColumn(name = "playlist_id"),
+		inverseJoinColumns = @JoinColumn(name = "song_id")
 	)
     @Builder.Default
     private List<Song> songs = new ArrayList<Song>();
     
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "owner_id", nullable = false)
     private User owner;
 
     @Id

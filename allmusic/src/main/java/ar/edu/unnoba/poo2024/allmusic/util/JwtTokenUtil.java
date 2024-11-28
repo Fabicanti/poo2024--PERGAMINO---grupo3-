@@ -42,6 +42,11 @@ public class JwtTokenUtil {
         return decodedJWT.getSubject();
     }
 
+    public String getUserType(String token) {
+        DecodedJWT decodedJWT = JWT.decode(token);
+        return decodedJWT.getClaim("role").asString();
+    }
+
     public Collection<? extends GrantedAuthority> getAuthorities(String token) {
         DecodedJWT decodedJWT = JWT.decode(token);
         String role = decodedJWT.getClaim("role").asString();

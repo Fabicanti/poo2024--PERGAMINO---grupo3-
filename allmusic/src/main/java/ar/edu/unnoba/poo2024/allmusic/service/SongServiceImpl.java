@@ -5,65 +5,107 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ar.edu.unnoba.poo2024.allmusic.dto.SongRequestDTO;
 import ar.edu.unnoba.poo2024.allmusic.dto.SongResponseDTO;
+import ar.edu.unnoba.poo2024.allmusic.model.Genre;
+import ar.edu.unnoba.poo2024.allmusic.model.MusicArtistUser;
 import ar.edu.unnoba.poo2024.allmusic.model.Song;
 import ar.edu.unnoba.poo2024.allmusic.repository.SongRepository;
+import ar.edu.unnoba.poo2024.allmusic.repository.UserRepository;
 import ar.edu.unnoba.poo2024.allmusic.util.ResourceNotFoundException;
 
 @Service
 public class SongServiceImpl implements SongService {
-    
-        private final SongRepository songRepository;
-        private final ModelMapper modelMapper;  // Usamos ModelMapper para mapear entre entidad y DTO.
-    
-        public SongServiceImpl(SongRepository songRepository, ModelMapper modelMapper) {
-            this.songRepository = songRepository;
-            this.modelMapper = modelMapper;
-        }
-    
-        @Override
-        public SongResponseDTO createSong(SongRequestDTO songRequestDTO) {
-            Song song = modelMapper.map(songRequestDTO, Song.class);  // Convertimos el DTO a entidad.
-            Song savedSong = songRepository.save(song);  // Guardamos la canción en la base de datos.
-            return modelMapper.map(savedSong, SongResponseDTO.class);  // Convertimos la entidad guardada a DTO.
-        }
-    
-        @Override
-        public Optional<SongResponseDTO> getSongById(Long songId) {
-            return songRepository.findById(songId)
-                    .map(song -> modelMapper.map(song, SongResponseDTO.class));  // Mapear a DTO si la canción existe.
-        }
-    
-        @Override
-        public List<SongResponseDTO> getAllSongs() {
-            List<Song> songs = songRepository.findAll();  // Obtenemos todas las canciones.
-            return songs.stream()
-                    .map(song -> modelMapper.map(song, SongResponseDTO.class))
-                    .collect(Collectors.toList());  // Convertimos cada canción a DTO.
-        }
-    
-        @Override
-        public SongResponseDTO updateSong(Long songId, SongRequestDTO songRequestDTO) {
-            Song songToUpdate = songRepository.findById(songId)
-                    .orElseThrow(() -> new ResourceNotFoundException("Cancion no encontrada"));  // Lanzar excepción si no existe.
-    
-            songToUpdate.setName(songRequestDTO.getName());
-            songToUpdate.setGenre(songRequestDTO.getGenre());
-            songToUpdate.setArtist(songRequestDTO.getArtist());
-            
-            Song updatedSong = songRepository.save(songToUpdate);  // Guardamos la actualización.
-            return modelMapper.map(updatedSong, SongResponseDTO.class);  // Retornamos el DTO actualizado.
-        }
-    
-        @Override
-        public void deleteSong(Long songId) {
-            if (!songRepository.existsById(songId)) {
-                throw new ResourceNotFoundException("Cancion no encontrada");
-            }
-            songRepository.deleteById(songId);  // Eliminamos la canción por ID.
-        }
 
-        
+    @Autowired
+    private SongRepository songRepository;
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private ModelMapper modelMapper;
+
+    @Override
+    public SongResponseDTO createSong(SongRequestDTO songRequestDTO) {
+        try {
+            if (songRequestDTO.getArtist() == null || songRequestDTO.getArtist().isEmpty()) {
+                throw new IllegalArgumentException("Artist username must not be null or empty");
+            }
+            MusicArtistUser artist = userRepository.findArtistByUsername(songRequestDTO.getArtist())
+                    .orElseThrow(() -> new ResourceNotFoundException("Artist not found"));
+            Song song = new Song();
+            song.setArtist(artist);
+            song.setName(songRequestDTO.getName());
+            song.setGenre(Genre.valueOf(songRequestDTO.getGenre().toUpperCase()));
+            Song savedSong = songRepository.save(song);
+            return modelMapper.map(savedSong, SongResponseDTO.class);
+        } catch (Exception e) {
+            throw e;
+        }
     }
+
+    @Override
+    public Optional<SongResponseDTO> getSongById(Long songId) {
+        return songRepository.findById(songId)
+                .map(song -> modelMapper.map(song, SongResponseDTO.class)); // Mapear a DTO si la canción existe.
+    }
+
+    @Override
+    public List<SongResponseDTO> getAllSongs() {
+        List<Song> songs = songRepository.findAll();
+        return songs.stream()
+                .map(song -> modelMapper.map(song, SongResponseDTO.class))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public SongResponseDTO updateSong(Long songId, SongRequestDTO songRequestDTO) {
+        Song songToUpdate = songRepository.findById(songId)
+                .orElseThrow(() -> new ResourceNotFoundException("Cancion no encontrada"));
+        songToUpdate.setName(songRequestDTO.getName());
+        songToUpdate.setGenre(Genre.valueOf(songRequestDTO.getGenre().toUpperCase()));
+        MusicArtistUser artist = userRepository.findArtistByUsername(songRequestDTO.getArtist())
+                .orElseThrow(() -> new ResourceNotFoundException("Artist not found"));
+        songToUpdate.setArtist(artist);
+        Song updatedSong = songRepository.save(songToUpdate);
+        return modelMapper.map(updatedSong, SongResponseDTO.class);
+    }
+
+    @Override
+    public void deleteSong(Long songId) {
+        if (!songRepository.existsById(songId)) {
+            throw new ResourceNotFoundException("Cancion no encontrada");
+        }
+        songRepository.deleteById(songId);
+    }
+
+    @Override
+    public List<SongResponseDTO> getSongsByArtist(String artistName) {
+        MusicArtistUser artist = userRepository.findArtistByUsername(artistName)
+                .orElseThrow(() -> new ResourceNotFoundException("Artist not found"));
+        List<Song> songs = songRepository.findByArtist_id(artist.getId());
+        return songs.stream()
+                .map(song -> modelMapper.map(song, SongResponseDTO.class))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<SongResponseDTO> getSongsByGenre(String genre) {
+        List<Song> songs = songRepository.findByGenre(Genre.valueOf(genre.toUpperCase()));
+        return songs.stream()
+                .map(song -> modelMapper.map(song, SongResponseDTO.class))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<SongResponseDTO> getSongsByArtistAndGenre(String artistName, String genre) {
+        MusicArtistUser artist = userRepository.findArtistByUsername(artistName)
+                .orElseThrow(() -> new ResourceNotFoundException("Artist not found"));
+        List<Song> songs = songRepository.findByArtist_idAndGenre(artist.getId(), Genre.valueOf(genre.toUpperCase()));
+        return songs.stream()
+                .map(song -> modelMapper.map(song, SongResponseDTO.class))
+                .collect(Collectors.toList());
+    }
+
+}

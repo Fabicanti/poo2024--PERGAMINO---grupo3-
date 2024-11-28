@@ -19,11 +19,13 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        
-        http.csrf(csrf -> csrf.disable())
+        http.headers(headers -> headers.frameOptions(frameOptions -> frameOptions.disable())) // Permite la carga del iframe de H2 Console
+            .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> {
                 auth.requestMatchers("/h2-console/**").permitAll();
                 auth.requestMatchers(HttpMethod.POST, "/api/auth/**").permitAll();
+                auth.requestMatchers(HttpMethod.POST, "/api/artist/**").permitAll();
+                auth.requestMatchers(HttpMethod.POST, "/api/enthusiast**").permitAll();
                 auth.anyRequest().authenticated();
             })
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
