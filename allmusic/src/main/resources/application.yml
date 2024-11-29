@@ -1,6 +1,6 @@
 spring:
     application:
-        name: allmusic
+        name: allmusic-service
     datasource:
         url: jdbc:h2:mem:allmusicdb
         driver-class-name: org.h2.Driver
@@ -24,4 +24,10 @@ spring:
                     jwk-set-uri: "https://example.com/.well-known/jwks.json"  # URL to the JSON Web Key Set
 server:
   port: 8080
-
+eureka:
+    client:
+        service-url:
+            defaultZone: http://localhost:8761/eureka/
+    instance:
+        prefer-ip-address: true
+        hostname: localhost

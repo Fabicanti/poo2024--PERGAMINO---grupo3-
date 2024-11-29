@@ -1,0 +1,29 @@
+spring:
+    application:
+        name: gateway-allmusic
+    cloud:
+        gateway:
+            default-filters:
+                - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+            globalcors:
+                corsConfigurations:
+                    '[/**]':
+                        allowedOrigins: "*"
+                        allowedMethods: "*"
+                        allowedHeaders: "*"
+            routes:
+                - id: allmusic-service
+                  uri: lb://allmusic-service
+                  predicates:
+                    - Path=/music/**
+                  filters:
+                    - RewritePath=/music/*, /
+server:
+    port: 7000
+eureka:
+    client:
+        serviceUrl:
+            defaultZone: http://localhost:8761/eureka/
+        register-with-eureka: false
+
+  
