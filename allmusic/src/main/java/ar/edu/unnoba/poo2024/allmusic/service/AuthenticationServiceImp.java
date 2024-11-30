@@ -1,6 +1,7 @@
 package ar.edu.unnoba.poo2024.allmusic.service;
 
 import ar.edu.unnoba.poo2024.allmusic.dto.AuthenticationRequestDTO;
+import ar.edu.unnoba.poo2024.allmusic.dto.AuthenticationResponseDTO;
 import ar.edu.unnoba.poo2024.allmusic.model.User;
 import ar.edu.unnoba.poo2024.allmusic.util.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,23 +21,18 @@ public class AuthenticationServiceImp implements AuthenticationService {
     private UserService userService;
 
     @Override
-    public String authenticate(AuthenticationRequestDTO request) {
-        //necesito verificar que el usuario y la contraseña sean correctos
-        //y si son correctos, genero el token pasando el username y el tipo de usuario
-        //si no son correctos, lanzo una excepción
-        // Verificar si el usuario existe
+    public AuthenticationResponseDTO authenticate(AuthenticationRequestDTO request) {
         User user = userService.findByUsername(request.getUsername());
         if (user == null) {
             throw new RuntimeException("User not found");
         }
 
-        // Validar la contraseña
         if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
             throw new RuntimeException("Invalid credentials");
         }
 
-        // Generar y devolver el token
         String userType = user.getUserType();
-        return jwtTokenUtil.generateToken(user.getId().toString(), userType);
+        String token = jwtTokenUtil.generateToken(user.getId().toString(), userType);
+        return new AuthenticationResponseDTO(token, userType);
     }
 }

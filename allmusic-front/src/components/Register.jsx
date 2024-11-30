@@ -1,31 +1,59 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import '../styles/style.css';
+import { useNavigate, Link } from 'react-router-dom';
+import '../styles/style.css'; // Asegúrate de importar el archivo CSS
 
 function Register() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [userType, setUserType] = useState('entusiasta');
+  const [userType, setUserType] = useState('enthusiast'); // Default to enthusiast
+  const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
-  // Manejar el envío del formulario (aún no conecta con backend)
-  const handleSubmit = (event) => {
+  // Manejar el envío del formulario
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log('Creando usuario con:', username, password, userType);
-    // Aquí deberías hacer una petición al backend para crear el usuario.
-    // Después de crear el usuario, puedes redirigir al login o a otra página.
-    navigate('/login'); // Redirige al login después de crear el usuario
-  };
 
-  // Función para navegar a la página anterior
-  const goBack = () => {
-    navigate(-1); // Esto regresa al usuario a la página anterior
+    const userData = {
+      username,
+      password,
+    };
+
+    let url = '';
+    if (userType === 'enthusiast') {
+      url = 'http://localhost:7000/music/api/enthusiast';
+    } else if (userType === 'artist') {
+      url = 'http://localhost:7000/music/api/artist';
+    }
+
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
+      });
+
+      if (response.status === 201) {
+        // Registro exitoso, redirigir al login
+        navigate('/login');
+      } else if (response.status === 409) {
+        // Usuario ya existe, limpiar campos y mostrar mensaje
+        setUsername('');
+        setPassword('');
+        setErrorMessage('El usuario ya existe. Intenta con otro nombre de usuario.');
+      }
+    } catch (error) {
+      console.error('Error al registrar usuario:', error);
+      setErrorMessage('Hubo un error al registrar el usuario.');
+    }
   };
 
   return (
     <div className="create-user-container">
       <div className="create-user-box">
-        <h2>Crear nuevo usuario</h2>
+        <h2>Registrar Usuario</h2>
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
         <form onSubmit={handleSubmit}>
           <div className="input-group">
             <label htmlFor="username">Nombre de usuario</label>
@@ -58,28 +86,20 @@ function Register() {
               onChange={(e) => setUserType(e.target.value)}
               required
             >
-              <option value="entusiasta">Entusiasta</option>
-              <option value="artista">Artista</option>
+              <option value="enthusiast">Entusiasta</option>
+              <option value="artist">Artista</option>
             </select>
           </div>
           <button type="submit" className="btn btn-primary btn-lg">
-            Crear usuario
+            Registrar
           </button>
         </form>
-
-        {/* Botones para navegación */}
-        <div className="button-group" style={{ marginTop: '1rem' }}>
-          <button onClick={() => navigate('/login')} className="btn btn-secondary btn-lg">
-            Ir al login
-          </button>
-          <button onClick={goBack} className="btn btn-secondary btn-lg">
-            Volver
-          </button>
-        </div>
+        <Link to="/" className="btn btn-secondary btn-lg">
+          Volver al inicio
+        </Link>
       </div>
     </div>
   );
 }
 
 export default Register;
-

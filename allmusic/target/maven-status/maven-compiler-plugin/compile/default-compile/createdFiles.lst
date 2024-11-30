@@ -17,6 +17,7 @@ ar\edu\unnoba\poo2024\allmusic\repository\PlaylistRepository.class
 ar\edu\unnoba\poo2024\allmusic\dto\AuthenticationRequestDTO.class
 ar\edu\unnoba\poo2024\allmusic\dto\PlaylistSummaryDTO.class
 ar\edu\unnoba\poo2024\allmusic\model\Genre.class
+ar\edu\unnoba\poo2024\allmusic\dto\AuthenticationResponseDTO.class
 ar\edu\unnoba\poo2024\allmusic\util\ResourceNotFoundException.class
 ar\edu\unnoba\poo2024\allmusic\service\AuthenticationService.class
 ar\edu\unnoba\poo2024\allmusic\model\User.class

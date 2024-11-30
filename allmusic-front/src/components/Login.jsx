@@ -1,59 +1,47 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+import { useAuth } from './AuthContext';
 import '../styles/style.css';
 
-function Register() {
+function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [userType, setUserType] = useState('enthusiast');
-  const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
+  const { login } = useAuth();
 
-  // Manejar el envío del formulario
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const userData = {
-      username,
-      password,
-    };
-
-    let url = '';
-    if (userType === 'enthusiast') {
-      url = 'http://localhost:7000/music/api/enthusiast';
-    } else if (userType === 'artist') {
-      url = 'http://localhost:7000/music/api/artist';
-    }
+    const credentials = { username, password };
 
     try {
-      const response = await fetch(url, {
+      const response = await fetch('http://localhost:7000/music/api/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(userData),
+        body: JSON.stringify(credentials),
       });
 
-      if (response.status === 201) {
-        // Registro exitoso, redirigir al login
-        navigate('/login');
-      } else if (response.status === 409) {
-        // Usuario ya existe, limpiar campos y mostrar mensaje
-        setUsername('');
-        setPassword('');
-        setErrorMessage('El usuario ya existe. Intenta con otro nombre de usuario.');
+      if (!response.ok) {
+        throw new Error('Credenciales incorrectas');
       }
+
+      const data = await response.json();
+      console.log('Respuesta del backend:', data);
+
+      login(data.token, data.userType);
+      navigate('/dashboard');
     } catch (error) {
-      console.error('Error al registrar usuario:', error);
-      setErrorMessage('Hubo un error al registrar el usuario.');
+      console.error('Error de autenticación:', error);
+      alert('Credenciales incorrectas, intente nuevamente.');
     }
   };
 
   return (
-    <div className="register-container">
-      <div className="register-box">
-        <h2>Registrar Usuario</h2>
-        {errorMessage && <p className="error-message">{errorMessage}</p>}
+    <div className="login-container">
+      <div className="login-box">
+        <h2>Iniciar sesión</h2>
         <form onSubmit={handleSubmit}>
           <div className="input-group">
             <label htmlFor="username">Nombre de usuario</label>
@@ -77,30 +65,19 @@ function Register() {
               required
             />
           </div>
-          <div className="input-group">
-            <label htmlFor="userType">Tipo de usuario</label>
-            <select
-              id="userType"
-              name="userType"
-              value={userType}
-              onChange={(e) => setUserType(e.target.value)}
-              required
-            >
-              <option value="enthusiast">Entusiasta</option>
-              <option value="artist">Artista</option>
-            </select>
-          </div>
           <button type="submit" className="btn btn-primary btn-lg">
-            Registrar
+            Iniciar sesión
           </button>
         </form>
-        <div className="links">
-          <a href="/login">¿Ya tienes una cuenta? Inicia sesión</a>
-          <a href="/home">Volver al inicio</a>
-        </div>
+        <Link to="/register" className="btn btn-secondary btn-lg">
+          Registrate
+        </Link>
+        <Link to="/" className="btn btn-secondary btn-lg">
+          Volver al inicio
+        </Link>
       </div>
     </div>
   );
 }
 
-export default Register;
+export default Login;
