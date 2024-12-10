@@ -5,6 +5,7 @@ import Register from './components/Register';
 import Dashboard from './components/Dashboard';
 import SearchUser from './components/section/SearchUser';
 import { AuthProvider } from './components/AuthContext';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (

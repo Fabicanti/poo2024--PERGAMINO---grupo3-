@@ -10,6 +10,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PlaylistSummaryDTO {
+    private Long id;
     private String name;
     private long songCount;
 }

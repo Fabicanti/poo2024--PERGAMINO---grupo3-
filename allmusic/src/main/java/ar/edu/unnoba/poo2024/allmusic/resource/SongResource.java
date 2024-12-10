@@ -35,12 +35,10 @@ public class SongResource {
             @RequestParam(value = "artist", required = false) String artistName,
             @RequestParam(value = "genre", required = false) String genre) {
         try {
+            //cambiar a un sericio
             String token = tokenJWT.replace("Bearer ", "");
-            String userType = jwtTokenUtil.getUserType(token);
-            if (!userType.equals("Artist")) {
-                return new ResponseEntity<>("Acces forbidden for Artist", HttpStatus.FORBIDDEN);
-            }
             authorizationService.verify(token);
+            ///------------------
             List<SongResponseDTO> songResponseDTO;
             if (artistName != null && genre != null) {
                 songResponseDTO = songService.getSongsByArtistAndGenre(artistName, genre);
@@ -52,7 +50,6 @@ public class SongResource {
                 songResponseDTO = songService.getAllSongs();
             }
             return new ResponseEntity<>(songResponseDTO, HttpStatus.OK);
-
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }

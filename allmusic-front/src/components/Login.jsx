@@ -12,29 +12,21 @@ function Login() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const credentials = { username, password };
-
     try {
       const response = await fetch('http://localhost:7000/music/api/auth/login', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(credentials),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password }),
       });
 
-      if (!response.ok) {
-        throw new Error('Credenciales incorrectas');
-      }
+      if (!response.ok) throw new Error('Credenciales incorrectas');
 
       const data = await response.json();
-      console.log('Respuesta del backend:', data);
-
-      login(data.token, data.userType);
+      login(data.token, data.userType, username);
       navigate('/dashboard');
     } catch (error) {
-      console.error('Error de autenticación:', error);
-      alert('Credenciales incorrectas, intente nuevamente.');
+      console.error('Error de autenticación:', error.message);
+      alert('Error: Credenciales incorrectas. Intenta nuevamente.');
     }
   };
 
@@ -48,7 +40,6 @@ function Login() {
             <input
               type="text"
               id="username"
-              name="username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               required
@@ -59,22 +50,17 @@ function Login() {
             <input
               type="password"
               id="password"
-              name="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
             />
           </div>
-          <button type="submit" className="btn btn-primary btn-lg">
-            Iniciar sesión
-          </button>
+          <button type="submit" className="btn btn-primary btn-lg">Iniciar sesión</button>
         </form>
-        <Link to="/register" className="btn btn-secondary btn-lg">
-          Registrate
-        </Link>
-        <Link to="/" className="btn btn-secondary btn-lg">
-          Volver al inicio
-        </Link>
+        <div className="links">
+          <Link to="/register" className="btn btn-secondary btn-lg">Regístrate</Link>
+          <Link to="/" className="btn btn-secondary btn-lg">Volver al inicio</Link>
+        </div>
       </div>
     </div>
   );

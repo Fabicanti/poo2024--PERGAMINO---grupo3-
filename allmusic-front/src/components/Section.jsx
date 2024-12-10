@@ -19,7 +19,7 @@ function Section({ selectedOption }) {
     case 'search-user':
       return <SearchUser />;
     default:
-      return <div className="empty-state">🎵 Selecciona una opción del menú 🎵</div>;
+      return <AllSongs />;
   }
 }
 

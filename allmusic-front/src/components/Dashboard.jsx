@@ -12,7 +12,6 @@ function Dashboard() {
 
   useEffect(() => {
     console.log('userType en Dashboard:', userType);
-    // Si userType no está configurado, redirigir al login
     if (!userType) {
       navigate('/login');
     }

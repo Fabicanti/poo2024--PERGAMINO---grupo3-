@@ -12,7 +12,7 @@ import ar.edu.unnoba.poo2024.allmusic.model.PlayList;
 
 @Repository
 public interface PlaylistRepository extends JpaRepository<PlayList, Long> {
-    @Query("SELECT new ar.edu.unnoba.poo2024.allmusic.dto.PlaylistSummaryDTO(p.name, COUNT(s.id)) " +
+    @Query("SELECT new ar.edu.unnoba.poo2024.allmusic.dto.PlaylistSummaryDTO(p.id, p.name, COUNT(s.id)) " +
            "FROM PlayList p " +
            "LEFT JOIN p.songs s " +
            "GROUP BY p.id, p.name")

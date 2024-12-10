@@ -1,15 +1,14 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import '../styles/style.css'; // Asegúrate de importar el archivo CSS
+import '../styles/style.css';
 
 function Register() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [userType, setUserType] = useState('enthusiast'); // Default to enthusiast
+  const [userType, setUserType] = useState('enthusiast');
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
-  // Manejar el envío del formulario
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -35,10 +34,8 @@ function Register() {
       });
 
       if (response.status === 201) {
-        // Registro exitoso, redirigir al login
         navigate('/login');
       } else if (response.status === 409) {
-        // Usuario ya existe, limpiar campos y mostrar mensaje
         setUsername('');
         setPassword('');
         setErrorMessage('El usuario ya existe. Intenta con otro nombre de usuario.');
