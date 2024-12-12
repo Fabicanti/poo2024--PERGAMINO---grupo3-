@@ -64,7 +64,7 @@ function AllPlaylists() {
       {error && <p style={{ color: 'red' }}>{error}</p>}
 
       {/* Buscar por ID */}
-      <Form inline className="mb-3">
+      <Form inline={"true"} className="mb-3">
         <Form.Control
           type="text"
           placeholder="Buscar por ID"

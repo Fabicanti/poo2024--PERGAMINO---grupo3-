@@ -68,7 +68,7 @@ function SearchUser() {
     return (
         <div>
             <h2>Buscar Usuario</h2>
-            <Form inline className="mb-3" onSubmit={handleSearch}>
+            <Form inline={"true"} className="mb-3" onSubmit={handleSearch}>
                 <Form.Control
                     type="text"
                     placeholder="Ingrese el nombre de usuario"

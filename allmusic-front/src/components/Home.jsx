@@ -6,6 +6,7 @@ function Home() {
     <div className="home-container">
       <div className="home-content">
         <h1>Bienvenido a AllMusic</h1>
+        <img src="/public/allmusic.jpg" alt="Imagen del programa" className="program-image" />
         <p>El lugar perfecto para gestionar tus canciones y playlists.</p>
         <Link to="/login">
           <button className="btn btn-primary btn-lg home-button">

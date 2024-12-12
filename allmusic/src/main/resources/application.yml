@@ -6,7 +6,12 @@ spring:
         driver-class-name: org.h2.Driver
         username: allmusic
         password: ''
+        #url: jdbc:postgresql://localhost:5432/allmusicdb
+        #driver-class-name: org.postgresql.Driver
+        #username: postgresql
+        #password: 
     jpa:
+        #database-platform: org.hibernate.dialect.PostgreSQLDialect
         database-platform: org.hibernate.dialect.H2Dialect
         hibernate:
             ddl-auto: create-drop
@@ -21,7 +26,7 @@ spring:
             resourceserver:
                 jwt:
                     issuer-uri: https://dev-123456.okta.com/oauth2/default
-                    jwk-set-uri: "https://example.com/.well-known/jwks.json"  # URL to the JSON Web Key Set
+                    jwk-set-uri: "https://example.com/.well-known/jwks.json"
 server:
   port: 8080
 eureka:

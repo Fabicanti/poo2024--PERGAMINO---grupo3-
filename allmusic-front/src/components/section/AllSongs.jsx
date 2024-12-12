@@ -43,7 +43,7 @@ function AllSongs() {
   return (
     <div>
       <h2>Todas las Canciones</h2>
-      <Form inline className="mb-3">
+      <Form inline={"true"} className="mb-3">
         <Form.Control
           type="text"
           placeholder="Buscar por Artista"

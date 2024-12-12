@@ -18,7 +18,6 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
             <Route path="/dashboard/search-user" element={<SearchUser />} />
-
           </Routes>
         </div>
       </Router>
